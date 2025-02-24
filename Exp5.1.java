@@ -16,23 +16,53 @@ parseStringToInteger(): This method parses a string into an Integer. It catches 
 calculateSum(): This method calculates the sum of a list of integers. Java automatically performs unboxing when adding Integer values to sum (an int).
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class SumCalculator {
+
+    public static Integer parseStringToInteger(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format: " + str);
+            return null;
+        }
+    }
+
+    public static int calculateSum(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer num : numbers) {
+            if (num != null) {
+                sum += num;
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(10);
+        list1.add(20);
+        list1.add(30);
+        list1.add(parseStringToInteger("40"));
+        list1.add(parseStringToInteger("50"));
+
+        System.out.println("The sum of the list is: " + calculateSum(list1));
+
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(parseStringToInteger("100"));
+        list2.add(parseStringToInteger("200"));
+        list2.add(parseStringToInteger("300"));
+
+        System.out.println("The sum of the list is: " + calculateSum(list2));
+
+        List<Integer> list3 = new ArrayList<>();
+        list3.add(parseStringToInteger("50"));
+        list3.add(parseStringToInteger("invalid"));
+        list3.add(parseStringToInteger("70"));
+
+        System.out.println("The sum of the list is: " + calculateSum(list3));
+    }}
 
 
-Test Cases:
-
-Test Case 1:
-Input: 10, 20, 30, "40", "50"
-Expected Output: The sum of the list is: 150
-Description: The list contains a mix of primitive integers and integers parsed from strings.
-
-Test Case 2:
-Input: "100", "200", "300"
-Expected Output: The sum of the list is: 600
-Description: All values are parsed from strings, and the sum is calculated.
-
-Test Case 3:
-Input: "50", "invalid", "70"
-Expected Output:
-Invalid number format: invalid
-The sum of the list is: 120
-Description: One of the inputs is not a valid integer, so it's skipped, and the sum of valid values is calculated.
